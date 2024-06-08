@@ -22,3 +22,7 @@ export default function CreditsButton({ credits }) {
     </button>
   );
 }
+
+CreditsButton.propTypes = {
+  credits: Number,
+};

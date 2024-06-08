@@ -1,4 +1,3 @@
-import React from 'react';
 import './Creations.css';
 
 export default function Creations() {
