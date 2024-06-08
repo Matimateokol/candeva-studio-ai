@@ -21,7 +21,7 @@ export default function GeneratorSection() {
         padding: '20px',
         backgroundColor: LIGHT_BLUE,
         borderRadius: '25px',
-        maxWidth: '33%',
+        maxWidth: '30%',
         minWidth: '340px',
         boxShadow: `1px 3px 5px ${GREY}`,
       }}>
