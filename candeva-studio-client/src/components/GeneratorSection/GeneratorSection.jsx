@@ -21,8 +21,7 @@ export default function GeneratorSection() {
         padding: '20px',
         backgroundColor: LIGHT_BLUE,
         borderRadius: '25px',
-        maxWidth: '30%',
-        minWidth: '340px',
+        minWidth: '30rem',
         boxShadow: `1px 3px 5px ${GREY}`,
       }}>
       <Textarea

@@ -1,44 +1,68 @@
+import { useState } from 'react';
 import GeneratorSection from '../GeneratorSection/GeneratorSection';
 import OptionPickerSection from '../OptionPickerSection/OptionPickerSection';
-import horrorStyle from '../../assets/images/HorrorStyleImage.png';
-import creepyMansion from '../../assets/images/CreepyMansionImage.png';
-import lightCardTemplate from '../../assets/images/LightCardTemplate.png';
 import './Home.css';
 import { BLACK } from '../../assets/colors';
+import GeneratedImageSection from '../GeneratedImageSection/GeneratedImageSection';
+import CardTemplateImagesSection from '../CardTemplateImagesSection/CardTemplateImagesSection';
 
 export default function Home() {
+  const [gameStyleImage, setGameStyleImage] = useState(
+    '/images/HorrorStyleImage.png',
+  );
+  const [assetTypeImage, setAssetTypeImage] = useState(
+    '/images/CreepyMansionImage.png',
+  );
+  const [cardTemplateImage, setCardTemplateImage] = useState(
+    '/images/LightCardTemplate.png',
+  );
+
   return (
-    <>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'start',
-          marginLeft: '1rem',
-          marginTop: '2vh',
-          marginBottom: '2vh',
-          color: BLACK,
-          fontStyle: 'Kadwa',
-          fontSize: '18px',
-        }}>
-        <span style={{ fontWeight: 'bold' }}>Projects /</span>
-        <span>Project 0</span>
+    <div
+      id="gridLayoutContainer"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1.5fr 1.0fr',
+      }}>
+      <div id="leftSection">
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'start',
+            marginLeft: '1rem',
+            marginTop: '2vh',
+            marginBottom: '2vh',
+            color: BLACK,
+            fontStyle: 'Kadwa',
+            fontSize: '18px',
+          }}>
+          <span style={{ fontWeight: 'bold' }}>Projects /</span>
+          <span>Project 0</span>
+        </div>
+        <GeneratorSection />
+        <OptionPickerSection
+          title={'Game Style'}
+          image={gameStyleImage}
+          maxSize={'100px'}
+        />
+        <OptionPickerSection
+          title={'Asset Type'}
+          image={assetTypeImage}
+          maxSize={'100px'}
+        />
+        <OptionPickerSection
+          title={'Card Template'}
+          image={cardTemplateImage}
+          maxSize={'100px'}
+        />
       </div>
-      <GeneratorSection />
-      <OptionPickerSection
-        title={'Game Style'}
-        image={horrorStyle}
-        maxSize={'100px'}
-      />
-      <OptionPickerSection
-        title={'Asset Type'}
-        image={creepyMansion}
-        maxSize={'100px'}
-      />
-      <OptionPickerSection
-        title={'Card Template'}
-        image={lightCardTemplate}
-        maxSize={'100px'}
-      />
-    </>
+      <div id="middleSection">
+        <GeneratedImageSection />
+        <CardTemplateImagesSection />
+      </div>
+      <div id="rightSection">
+        <p>Right side</p>
+      </div>
+    </div>
   );
 }
