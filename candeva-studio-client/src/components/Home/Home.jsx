@@ -5,6 +5,8 @@ import './Home.css';
 import { BLACK } from '../../assets/colors';
 import GeneratedImageSection from '../GeneratedImageSection/GeneratedImageSection';
 import CardTemplateImagesSection from '../CardTemplateImagesSection/CardTemplateImagesSection';
+import TextDescriptionGeneratorSection from '../TextDescriptionGeneratorSection/TextDescriptionGeneratorSection';
+import FloatingToolbar from '../FloatingToolbar/FloatingToolbar';
 
 export default function Home() {
   const [gameStyleImage, setGameStyleImage] = useState(
@@ -36,7 +38,9 @@ export default function Home() {
             fontStyle: 'Kadwa',
             fontSize: '18px',
           }}>
-          <span style={{ fontWeight: 'bold' }}>Projects /</span>
+          <span style={{ fontWeight: 'bold', paddingRight: '5px' }}>
+            Projects /
+          </span>
           <span>Project 0</span>
         </div>
         <GeneratorSection />
@@ -61,7 +65,12 @@ export default function Home() {
         <CardTemplateImagesSection />
       </div>
       <div id="rightSection">
-        <p>Right side</p>
+        <div>
+          <TextDescriptionGeneratorSection />
+        </div>
+        <div>
+          <FloatingToolbar />
+        </div>
       </div>
     </div>
   );

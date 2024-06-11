@@ -2,22 +2,21 @@ import { useState } from 'react';
 import { Textarea } from '@mui/joy';
 import { Typography } from '@mui/joy';
 import Button from '@mui/joy/Button';
-import IconButton from '@mui/joy/IconButton';
-import { Settings } from '@mui/icons-material';
-import { LIGHT_BLUE, DARK_BLUE, DARKER_BLUE, GREY } from '../../assets/colors';
-import './GeneratorSection.css';
+import { LIGHT_BLUE, DARK_BLUE, GREY } from '../../assets/colors';
+import './TextDescriptionGeneratorSection.css';
 
-export default function GeneratorSection() {
+export default function TextDescriptionGeneratorSection() {
   const [text, setText] = useState('');
 
   // const sampleText = `A dark hair indian princess in a white dress`;
   const placeholderText =
-    'Write a prompt here to generate your image... \nFor example: A strong-looking policeman in civillian clothes.';
+    'Write your own card description or generate a new one with AI...';
 
   return (
     <div
       style={{
-        marginLeft: '10px',
+        marginRight: '10px',
+        marginTop: '5vh',
         padding: '20px',
         backgroundColor: LIGHT_BLUE,
         borderRadius: '25px',
@@ -28,35 +27,21 @@ export default function GeneratorSection() {
         placeholder={placeholderText}
         value={text}
         onChange={(event) => setText(event.target.value)}
-        minRows={5}
-        maxRows={10}
+        minRows={10}
+        maxRows={20}
         endDecorator={
-          <Typography level="body-xs" sx={{ ml: 'auto', fontSize: 16 }}>
+          <Typography level="body-xs" sx={{ ml: 'auto', fontSize: 18 }}>
             {text.length} character(s)
           </Typography>
         }
-        sx={{ minWidth: 300, fontSize: 20 }}
+        sx={{ minWidth: 300, fontSize: 24, fontFamily: 'Kadwa' }}
       />
       <div
         style={{
           display: 'flex',
           justifyContent: 'space-between',
           paddingTop: '10px',
-        }}>
-        <span className="kadwa-primary">Image Prompt Builder</span>
-        <IconButton
-          sx={{
-            backgroundColor: DARK_BLUE,
-            '&:hover': { backgroundColor: DARKER_BLUE },
-          }}>
-          <Settings
-            sx={{
-              color: LIGHT_BLUE,
-              '&:hover': { color: LIGHT_BLUE },
-            }}
-          />
-        </IconButton>
-      </div>
+        }}></div>
       <div
         style={{
           display: 'flex',
@@ -69,7 +54,7 @@ export default function GeneratorSection() {
             backgroundColor: DARK_BLUE,
             fontSize: '24px',
           }}>
-          Generate Image
+          Generate Text
         </Button>
       </div>
     </div>

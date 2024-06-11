@@ -1,0 +1,7 @@
+#buttonsContainer {
+    display: flex;
+    justify-content: space-around;
+    border-radius: 15px;
+    margin: 30px;
+    padding: 5px;
+}
