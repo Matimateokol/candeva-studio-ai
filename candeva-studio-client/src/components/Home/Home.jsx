@@ -25,11 +25,12 @@ export default function Home() {
   );
   const [generatedText, setGeneratedText] = useState('');
 
-  const apiUrl = 'http://127.0.0.1:8080/api/images/abandoned_hospital.png';
+  const apiImageUrl = 'http://127.0.0.1:8080/api/images/abandoned_hospital.png';
+  const apiBaseUrl = 'http://127.0.0.1:8080/api';
 
   const handleGenerateImage = async () => {
     axios
-      .get(apiUrl, {
+      .get(apiImageUrl, {
         responseType: 'blob',
       })
       .then((res) => {
@@ -42,6 +43,33 @@ export default function Home() {
       })
       .catch((err) => {
         console.log(err);
+      });
+  };
+
+  const handleGenerateText = async (text) => {
+    console.log(text);
+    const textPrompt = text !== '' ? text : 'banana';
+    const json = JSON.stringify({ prompt: textPrompt });
+    const res = await axios({
+      baseURL: apiBaseUrl,
+      url: '/descriptions',
+      method: 'post',
+      data: json,
+      timeout: 10000,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        console.log(response.data);
+        setGeneratedText(response.data.description);
+      })
+      .catch((error) => {
+        if (error.code === 'ECONNABORTED') {
+          console.log('Request timed out');
+        } else {
+          console.log(error.message);
+        }
       });
   };
 
@@ -102,6 +130,7 @@ export default function Home() {
           <TextDescriptionGeneratorSection
             text={generatedText}
             onTextChange={handleTextChange}
+            onGenerateText={handleGenerateText}
           />
         </div>
         <div>
