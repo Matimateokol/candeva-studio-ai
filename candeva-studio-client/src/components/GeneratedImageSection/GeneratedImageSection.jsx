@@ -1,11 +1,6 @@
-import { useState } from 'react';
 import './GeneratedImageSection.css';
 
-export default function GeneratedImageSection() {
-  const [imageSource, setImageSource] = useState(
-    '/images/CreepyMansionImage.png',
-  );
-
+export default function GeneratedImageSection({ image }) {
   return (
     <div id="imageContainer">
       <img
@@ -15,7 +10,7 @@ export default function GeneratedImageSection() {
           margin: '25px',
         }}
         id="generatedImage"
-        src={imageSource}
+        src={image}
       />
     </div>
   );

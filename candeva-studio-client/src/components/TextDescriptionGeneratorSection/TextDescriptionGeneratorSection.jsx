@@ -5,9 +5,10 @@ import Button from '@mui/joy/Button';
 import { LIGHT_BLUE, DARK_BLUE, GREY } from '../../assets/colors';
 import './TextDescriptionGeneratorSection.css';
 
-export default function TextDescriptionGeneratorSection() {
-  const [text, setText] = useState('');
-
+export default function TextDescriptionGeneratorSection({
+  text,
+  onTextChange,
+}) {
   // const sampleText = `A dark hair indian princess in a white dress`;
   const placeholderText =
     'Write your own card description or generate a new one with AI...';
@@ -26,7 +27,7 @@ export default function TextDescriptionGeneratorSection() {
       <Textarea
         placeholder={placeholderText}
         value={text}
-        onChange={(event) => setText(event.target.value)}
+        onChange={onTextChange}
         minRows={10}
         maxRows={20}
         endDecorator={

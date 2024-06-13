@@ -7,7 +7,7 @@ import { Settings } from '@mui/icons-material';
 import { LIGHT_BLUE, DARK_BLUE, DARKER_BLUE, GREY } from '../../assets/colors';
 import './GeneratorSection.css';
 
-export default function GeneratorSection() {
+export default function GeneratorSection({ onGenerateImage }) {
   const [text, setText] = useState('');
 
   // const sampleText = `A dark hair indian princess in a white dress`;
@@ -68,7 +68,8 @@ export default function GeneratorSection() {
             borderRadius: '25px',
             backgroundColor: DARK_BLUE,
             fontSize: '24px',
-          }}>
+          }}
+          onClick={onGenerateImage}>
           Generate Image
         </Button>
       </div>

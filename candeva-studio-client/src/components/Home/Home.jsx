@@ -7,6 +7,7 @@ import GeneratedImageSection from '../GeneratedImageSection/GeneratedImageSectio
 import CardTemplateImagesSection from '../CardTemplateImagesSection/CardTemplateImagesSection';
 import TextDescriptionGeneratorSection from '../TextDescriptionGeneratorSection/TextDescriptionGeneratorSection';
 import FloatingToolbar from '../FloatingToolbar/FloatingToolbar';
+import axios from 'axios';
 
 export default function Home() {
   const [gameStyleImage, setGameStyleImage] = useState(
@@ -18,6 +19,35 @@ export default function Home() {
   const [cardTemplateImage, setCardTemplateImage] = useState(
     '/images/LightCardTemplate.png',
   );
+
+  const [generatedImage, setGeneratedImage] = useState(
+    '/images/CreepyMansionImage.png',
+  );
+  const [generatedText, setGeneratedText] = useState('');
+
+  const apiUrl = 'http://127.0.0.1:8080/api/images/abandoned_hospital.png';
+
+  const handleGenerateImage = async () => {
+    axios
+      .get(apiUrl, {
+        responseType: 'blob',
+      })
+      .then((res) => {
+        console.log('Success getting all images!');
+        console.log(res);
+        const blob = new Blob([res.data]);
+        // Create a URL for the blob
+        const url = window.URL.createObjectURL(blob);
+        setGeneratedImage(url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleTextChange = (event) => {
+    setGeneratedText(event.target.value);
+  };
 
   return (
     <div
@@ -43,7 +73,7 @@ export default function Home() {
           </span>
           <span>Project 0</span>
         </div>
-        <GeneratorSection />
+        <GeneratorSection onGenerateImage={handleGenerateImage} />
         <OptionPickerSection
           title={'Game Style'}
           image={gameStyleImage}
@@ -61,12 +91,18 @@ export default function Home() {
         />
       </div>
       <div id="middleSection">
-        <GeneratedImageSection />
-        <CardTemplateImagesSection />
+        <GeneratedImageSection image={generatedImage} />
+        <CardTemplateImagesSection
+          frontImage={generatedImage}
+          backText={generatedText}
+        />
       </div>
       <div id="rightSection">
         <div>
-          <TextDescriptionGeneratorSection />
+          <TextDescriptionGeneratorSection
+            text={generatedText}
+            onTextChange={handleTextChange}
+          />
         </div>
         <div>
           <FloatingToolbar />
