@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GeneratorSection from '../GeneratorSection/GeneratorSection';
 import OptionPickerSection from '../OptionPickerSection/OptionPickerSection';
 import './Home.css';
@@ -20,15 +20,52 @@ export default function Home() {
     '/images/LightCardTemplate.png',
   );
 
+  const assetType =
+    assetTypeImage === '/images/CreepyMansionImage.png'
+      ? '/place'
+      : '/character';
+
   const [generatedImage, setGeneratedImage] = useState(
     '/images/CreepyMansionImage.png',
   );
   const [generatedText, setGeneratedText] = useState('');
 
-  const apiImageUrl = 'http://127.0.0.1:8080/api/images/abandoned_hospital.png';
+  //const apiImageUrl = 'http://127.0.0.1:8080/api/images/abandoned_hospital.png';
   const apiBaseUrl = 'http://127.0.0.1:8080/api';
 
-  const handleGenerateImage = async () => {
+  const handleGenerateImage = async (text) => {
+    console.log(text);
+    const textPrompt = text !== '' ? text : 'banana';
+    const json = JSON.stringify({ prompt: textPrompt });
+
+    try {
+      const response = await axios({
+        baseURL: apiBaseUrl,
+        url: `/images${assetType}`,
+        method: 'post',
+        data: json,
+        timeout: 120000,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        responseType: 'blob',
+      });
+
+      console.log(response.data);
+
+      const blob = new Blob([response.data]);
+      // Create a URL for the blob
+      const url = window.URL.createObjectURL(blob);
+      setGeneratedImage(url);
+    } catch (error) {
+      if (error.code === 'ECONNABORTED') {
+        console.log('Request timed out');
+      } else {
+        console.log(error.message);
+      }
+    }
+
+    /*
     axios
       .get(apiImageUrl, {
         responseType: 'blob',
@@ -44,6 +81,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err);
       });
+      */
   };
 
   const handleGenerateText = async (text) => {
