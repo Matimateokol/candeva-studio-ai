@@ -20,6 +20,11 @@ export default function Home() {
     '/images/LightCardTemplate.png',
   );
 
+  const assetTypes = [
+    '/images/CreepyMansionImage.png',
+    '/images/ActressPrincess.png',
+  ];
+
   const assetType =
     assetTypeImage === '/images/CreepyMansionImage.png'
       ? '/place'
@@ -115,6 +120,17 @@ export default function Home() {
     setGeneratedText(event.target.value);
   };
 
+  const handleAssetSwap = () => {
+    let option = 0;
+    if (assetTypeImage == '/images/CreepyMansionImage.png') {
+      option = 1;
+    } else {
+      option = 0;
+    }
+    setAssetTypeImage(assetTypes[option]);
+    setGeneratedImage(assetTypes[option]);
+  };
+
   return (
     <div
       id="gridLayoutContainer"
@@ -149,6 +165,7 @@ export default function Home() {
           title={'Asset Type'}
           image={assetTypeImage}
           maxSize={'100px'}
+          onOptionSwap={handleAssetSwap}
         />
         <OptionPickerSection
           title={'Card Template'}

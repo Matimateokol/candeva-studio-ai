@@ -9,7 +9,7 @@ import {
 import { IconButton } from '@mui/joy';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
-export default function OptionPickerSection({ title, image, maxSize }) {
+export default function OptionPickerSection({ title, image, maxSize, onOptionSwap }) {
   return (
     <div
       style={{
@@ -37,11 +37,11 @@ export default function OptionPickerSection({ title, image, maxSize }) {
         style={{
           display: 'flex',
         }}>
-        <IconButton>
+        <IconButton onClick={onOptionSwap}>
           <KeyboardArrowLeft />
         </IconButton>
         <img style={{ maxHeight: maxSize, maxWidth: maxSize }} src={image} />
-        <IconButton>
+        <IconButton onClick={onOptionSwap}>
           <KeyboardArrowRight />
         </IconButton>
       </div>
